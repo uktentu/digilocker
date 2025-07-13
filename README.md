@@ -4,14 +4,24 @@ A Spring Boot application that implements a clone of DigiLocker with user valida
 
 ## Features
 
+### Backend Features
 - User authentication and authorization with JWT
 - Document upload, storage, and management
 - Document verification
 - Role-based access control
 - RESTful API with OpenAPI documentation
 
+### Frontend Features
+- Responsive user interface built with React and Bootstrap
+- User authentication (login/register)
+- Document management (view, create, edit, delete)
+- Document verification for moderators and admins
+- Search functionality for documents
+- Protected routes for authenticated users
+
 ## Technologies Used
 
+### Backend Technologies
 - Java 17
 - Spring Boot 3.5.3
 - Spring Security with JWT authentication
@@ -20,14 +30,24 @@ A Spring Boot application that implements a clone of DigiLocker with user valida
 - Oracle Database (for production)
 - OpenAPI/Swagger for API documentation
 
+### Frontend Technologies
+- React 18
+- React Router for navigation
+- React Bootstrap for UI components
+- Axios for API requests
+- JWT for authentication
+- CSS for styling
+
 ## Getting Started
 
 ### Prerequisites
 
 - Java 17 or higher
 - Maven 3.6 or higher
+- Node.js 14 or higher
+- npm 6 or higher
 
-### Installation
+### Backend Installation
 
 1. Clone the repository:
    ```
@@ -35,17 +55,36 @@ A Spring Boot application that implements a clone of DigiLocker with user valida
    cd digilocker
    ```
 
-2. Build the application:
+2. Build the backend application:
    ```
    mvn clean install
    ```
 
-3. Run the application:
+3. Run the backend application:
    ```
    mvn spring-boot:run
    ```
 
-The application will start on port 8080 by default.
+The backend application will start on port 8080 by default.
+
+### Frontend Installation
+
+1. Navigate to the frontend directory:
+   ```
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Run the frontend application:
+   ```
+   npm start
+   ```
+
+The frontend application will start on port 3000 by default and will automatically open in your default browser.
 
 ### API Documentation
 

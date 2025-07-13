@@ -153,6 +153,39 @@ public class DocumentService {
     }
 
     /**
+     * Get all unverified documents.
+     *
+     * @return list of unverified document DTOs
+     */
+    public List<DocumentDTO> getUnverifiedDocuments() {
+        List<Document> documents = documentRepository.findByVerified(false);
+        return documents.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Reject a document.
+     *
+     * @param id the document ID
+     * @param userId the user ID of the moderator/admin
+     * @return rejected document DTO
+     * @throws RuntimeException if document not found
+     */
+    @Transactional
+    public DocumentDTO rejectDocument(Long id, Long userId) {
+        Document document = documentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Document not found with id: " + id));
+
+        // Mark as rejected (you might want to add a 'rejected' field to the Document entity)
+        // For now, we'll just delete the document
+        documentRepository.delete(document);
+
+        // Return the document data before deletion
+        return convertToDTO(document);
+    }
+
+    /**
      * Convert Document entity to DocumentDTO.
      *
      * @param document the document entity

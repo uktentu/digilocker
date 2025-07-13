@@ -126,4 +126,33 @@ public class DocumentController {
         List<DocumentDTO> documents = documentService.searchDocumentsByName(name);
         return ResponseEntity.ok(documents);
     }
+
+    /**
+     * Get all unverified documents.
+     * Only accessible by moderators and admins.
+     *
+     * @return list of unverified document DTOs
+     */
+    @GetMapping("/unverified")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    public ResponseEntity<List<DocumentDTO>> getUnverifiedDocuments() {
+        List<DocumentDTO> documents = documentService.getUnverifiedDocuments();
+        return ResponseEntity.ok(documents);
+    }
+
+    /**
+     * Reject a document.
+     * Only accessible by moderators and admins.
+     *
+     * @param id the document ID
+     * @param userDetails the authenticated user details
+     * @return message response
+     */
+    @PutMapping("/{id}/reject")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+    public ResponseEntity<MessageResponse> rejectDocument(@PathVariable Long id,
+                                                        @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        documentService.rejectDocument(id, userDetails.getId());
+        return ResponseEntity.ok(new MessageResponse("Document rejected successfully"));
+    }
 }
